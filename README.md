@@ -53,7 +53,7 @@ You can download [MNIST dataset here](https://www.dropbox.com/s/9eoiignb7tlrr2u/
 
 ![graphG](./pics/graphG3.png)
 
-Top accuracy on test data: 99.41 %
+Top accuracy on test data: 99.41 % (run 2500 epochs)
 
 ## What you need to download and install beforehand:
 
