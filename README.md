@@ -1,6 +1,6 @@
 # WideOpenThoughts
 
-Wide Open Thoughts is almost same software as [DeeperThought](https://github.com/pepe78/DeeperThought), but instead of CUDA C++ uses OpenCL C++ so that AMD GPU cards can be used as well as NVIDIA GPU cards.
+Wide Open Thoughts (WOTs) is almost same software as [DeeperThought](https://github.com/pepe78/DeeperThought), but instead of CUDA C++ uses OpenCL C++ so that AMD GPU cards can be used as well as NVIDIA GPU cards.
 
 Wide Open Thoughts is general framework for training Deep Neural Networks (and convolutional as well) using OpenCL C++.
 
