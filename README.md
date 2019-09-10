@@ -33,6 +33,24 @@ Benchmarking Machine Learning Algorithms](https://arxiv.org/pdf/1708.07747.pdf),
 
 You can download [MNIST dataset here](https://www.dropbox.com/s/9eoiignb7tlrr2u/mnist.zip?dl=0). Mnist dataset can be found in other formats on [Yann Lecun's web page](http://yann.lecun.com/exdb/mnist/index.html) or [Kaggle's web page](https://www.kaggle.com/c/digit-recognizer).
 
+### configBB.txt
+
+#### batch size 4000, log loss error, auto step size
+
+> matrix,784,130,0.5,-0.001
+
+> sigmoid,130
+
+> dropout,130,0.5
+
+> matrix,130,10,0.5,-0.001
+
+> sigmoid,10
+
+![graphBB](./pics/graphBB.png)
+
+Top accuracy on test data: 97.47 %
+
 ### configG.txt (convolutional neural network CNN)
 
 #### batch size 4000, log loss error, auto step size
