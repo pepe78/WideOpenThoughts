@@ -65,11 +65,11 @@ Top accuracy on test data: 99.41 %
 
 ## Other alternatives for training DNNs:
 
-* [CNTK](https://github.com/Microsoft/CNTK)
+* [CNTK](https://github.com/Microsoft/CNTK) - Microsoft
 
 * [DeeperThought](https://github.com/pepe78/DeeperThought/)
 
-* [Pytorch](https://pytorch.org/)
+* [Pytorch](https://pytorch.org/) - Facebook
 
-* [TensorFlow](https://www.tensorflow.org/)
+* [TensorFlow](https://www.tensorflow.org/) - Google
 
