@@ -51,7 +51,7 @@ You can download [MNIST dataset here](https://www.dropbox.com/s/9eoiignb7tlrr2u/
 
 > softmax,10
 
-![graphG](./pics/graphG.png)
+![graphG](./pics/graphG2.png)
 
 Top accuracy on test data: 99.41 %
 
