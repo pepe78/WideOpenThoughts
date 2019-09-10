@@ -67,8 +67,9 @@ Top accuracy on test data: 99.41 %
 
 * [CNTK](https://github.com/Microsoft/CNTK)
 
+* [DeeperThought](https://github.com/pepe78/DeeperThought/)
+
 * [Pytorch](https://pytorch.org/)
 
 * [TensorFlow](https://www.tensorflow.org/)
 
-* [DeeperThought](https://github.com/pepe78/DeeperThought/)
