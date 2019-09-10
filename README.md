@@ -71,4 +71,4 @@ Top accuracy on test data: 99.41 %
 
 * [TensorFlow](https://www.tensorflow.org/)
 
-* [WideOpenThoughts](https://github.com/pepe78/WideOpenThoughts) - same as DeeperThought, but implemented in C++ OpenCL so that AMD GPU cards could be used
+* [DeeperThought](https://github.com/pepe78/DeeperThought/)
