@@ -1,6 +1,6 @@
 # WideOpenThoughts
 
-Wide Open Thoughts is exactly same software as [DeeperThought](https://github.com/pepe78/DeeperThought), but instead of CUDA C++ uses OpenCL C++ so that AMD GPU cards can be used as well as NVIDIA GPU cards.
+Wide Open Thoughts is almost same software as [DeeperThought](https://github.com/pepe78/DeeperThought), but instead of CUDA C++ uses OpenCL C++ so that AMD GPU cards can be used as well as NVIDIA GPU cards.
 
 Wide Open Thoughts is general framework for training Deep Neural Networks (and convolutional as well) using OpenCL C++.
 
@@ -51,7 +51,7 @@ You can download [MNIST dataset here](https://www.dropbox.com/s/9eoiignb7tlrr2u/
 
 > softmax,10
 
-![graphG](./results/graphG.png)
+![graphG](./pics/graphG.png)
 
 Top accuracy on test data: 99.41 %
 
@@ -67,8 +67,9 @@ Top accuracy on test data: 99.41 %
 
 * [CNTK](https://github.com/Microsoft/CNTK)
 
+* [DeeperThought](https://github.com/pepe78/DeeperThought/)
+
 * [Pytorch](https://pytorch.org/)
 
 * [TensorFlow](https://www.tensorflow.org/)
 
-* [DeeperThought](https://github.com/pepe78/DeeperThought/)
