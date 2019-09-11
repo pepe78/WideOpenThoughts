@@ -79,7 +79,7 @@ Top accuracy on test data: 99.41 % (run 2500 epochs)
 
 * [OpenCL](https://www.khronos.org/opencl/)
 
-* GPU card. Recommended: [Nvidia GeForce GTX 1080 Ti](https://www.nvidia.com/en-us/geforce/products/10series/geforce-gtx-1080-ti/) or [AMD Radeon VII](https://www.amd.com/en/products/graphics/amd-radeon-vii)
+* GPU card. Recommended: [Nvidia GeForce GTX 1080 Ti](https://www.nvidia.com/en-us/geforce/products/10series/geforce-gtx-1080-ti/) or [AMD Radeon VII](https://www.amd.com/en/products/graphics/amd-radeon-vii), but you can use any GPU supporting OpenCL.
 
 ## Other alternatives for training DNNs:
 
