@@ -514,20 +514,20 @@ __kernel void softmax_backward(__global float *dinp, __global  float *doutp, __g
 			float tmp = exp(inp[tid * inputWidth + i]);
 			sum += tmp;
 		}
-    for (int j = 0; j < inputWidth; j++)
-    {
-		  for (int i = 0; i < inputWidth; i++)
-		  {
-        if (i == j)
-        {
-  			  dinp[tid * inputWidth + i] += doutp[tid * inputWidth + j] * (sum - exp(inp[tid * inputWidth + i])) / (sum * sum) * exp(inp[tid * inputWidth + i]);
-        }
-        else
-        {
-  			  dinp[tid * inputWidth + i] -= doutp[tid * inputWidth + j] * exp(inp[tid * inputWidth + j]) / (sum * sum) * exp(inp[tid * inputWidth + i]);
-        }
-		  }
-    }
+		for (int j = 0; j < inputWidth; j++)
+		{
+			for (int i = 0; i < inputWidth; i++)
+			{
+				if (i == j)
+				{
+					dinp[tid * inputWidth + i] += doutp[tid * inputWidth + j] * (sum - exp(inp[tid * inputWidth + i])) / (sum * sum) * exp(inp[tid * inputWidth + i]);
+				}
+				else
+				{
+					dinp[tid * inputWidth + i] -= doutp[tid * inputWidth + j] * exp(inp[tid * inputWidth + j]) / (sum * sum) * exp(inp[tid * inputWidth + i]);
+				}
+			}
+		}
 	}
 }
 
