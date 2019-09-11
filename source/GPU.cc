@@ -94,6 +94,8 @@ void GPU::Execute(char *function_name, char *pars, void **objects, int globalSiz
 		fprintf(stderr, "Error enqueing kernel!\n");
 		exit(-1);
 	}
+
+	clReleaseKernel(kernel);
 }
 
 void GPU::WaitForGPUToFinish()
@@ -175,7 +177,6 @@ void GPU::InitGPU()
 void GPU::ReleaseGPU()
 {
 	clReleaseProgram(program);
-	clReleaseKernel(kernel);
 	clReleaseCommandQueue(queue);
 	clReleaseContext(context);
 }
