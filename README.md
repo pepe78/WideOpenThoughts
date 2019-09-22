@@ -69,9 +69,9 @@ Top accuracy on test data: 97.47 %
 
 > softmax,10
 
-![graphG](./pics/graphG3.png)
+![graphG](./pics/graphG4.png)
 
-Top accuracy on test data: 99.41 % (run 2500 epochs)
+Top accuracy on test data: 99.43 %
 
 ## What you need to download and install beforehand:
 
