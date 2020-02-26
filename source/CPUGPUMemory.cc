@@ -5,8 +5,6 @@
 #include <cstdio>
 #include <cstring>
 
-#include "cuda_runtime.h"
-#include "device_launch_parameters.h"
 
 CPUGPUMemory::CPUGPUMemory(GPU *_gpu, bool _is_float, int _size, float _initValues)
 {
