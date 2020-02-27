@@ -4,6 +4,12 @@ Wide Open Thoughts (WOTs) is almost same software as [DeeperThought](https://git
 
 Wide Open Thoughts is general framework for training Deep Neural Networks (and convolutional as well) using OpenCL C++.
 
+To install OpenCL on linux:
+
+> sudo apt update
+
+> sudo apt install ocl-icd-opencl-dev
+
 To compile on linux:
 
 > ./compile.sh
