@@ -57,6 +57,32 @@ You can download [MNIST dataset here](https://www.dropbox.com/s/9eoiignb7tlrr2u/
 
 Top accuracy on test data: 97.47 %
 
+### configBB2.txt
+
+#### batch size 4000, log loss error, auto step size
+
+> matrix,784,500,0.5,-0.001
+
+> sigmoid,500
+
+> matrix,500,250,0.5,-0.001
+
+> sigmoid,250
+
+> dropout,250,0.5
+
+> matrix,250,130,0.5,-0.001
+
+> sigmoid,130
+
+> matrix,130,10,0.5,-0.001
+
+> softmax,10
+
+![graphBB2](./pics/bb2.png)
+
+Top accuracy on test data: 98.35 %
+
 ### configG.txt (convolutional neural network CNN)
 
 #### batch size 4000, log loss error, auto step size
