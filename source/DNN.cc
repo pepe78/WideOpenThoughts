@@ -3,6 +3,7 @@
 #include "StringUtils.h"
 #include "DNNLayerConvolution.h"
 #include "DNNLayerMatrix.h"
+#include "DNNLayerAnd.h"
 #include "DNNLayerAugmentMatrix.h"
 #include "DNNLayerMax.h"
 #include "DNNLayerSigmoid.h"
@@ -75,6 +76,21 @@ DNN::DNN(GPU *_gpu, string &configFile, string &trainSetFile, string &testSetFil
 					if (parts.size() != 5)
 					{
 						fprintf(stderr, "wrong setup of matrix layer!\n");
+						exit(-1);
+					}
+					int inpWidth = convertToInt(parts[1]);
+					int outpWidth = convertToInt(parts[2]);
+					float initVal = convertToFloat(parts[3]);
+					float stepSize = convertToFloat(parts[4]);
+
+					DNNLayer *curLayer = new DNNLayerMatrix(_gpu, inpWidth, outpWidth, _batchSize, initVal, stepSize);
+					layers.push_back(curLayer);
+				}
+				else if (parts[0].compare("and") == 0)
+				{
+					if (parts.size() != 5)
+					{
+						fprintf(stderr, "wrong setup of and layer!\n");
 						exit(-1);
 					}
 					int inpWidth = convertToInt(parts[1]);

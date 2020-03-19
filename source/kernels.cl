@@ -311,6 +311,45 @@ __kernel void matrix_backward(__global float *dinp, __global float *dpars, __glo
 	}
 }
 
+__kernel void and_forward(__global float *outp, __global  float *inp, __global  float *pars, int inputWidth, int outputWidth, int batchSize)
+{
+	int tid = get_global_id(0);
+
+	if (tid < batchSize)
+	{
+		for (int i = 0; i < outputWidth; i++)
+		{
+			float tmp = pars[i * (inputWidth + 1)];
+			for (int j = 0; j < inputWidth; j++)
+			{
+				tmp *= pow(0.01f + 0.99f * inp[tid* inputWidth + j], pars[i * (inputWidth + 1) + 1 + j]);
+			}
+			outp[tid * outputWidth + i] = tmp;
+		}
+	}
+}
+
+__kernel void and_backward(__global float *dinp, __global float *dpars, __global  float *doutp, __global  float *outp, __global  float *inp, __global  float *pars, int inputWidth, int outputWidth, int batchSize)
+{
+	int tid = get_global_id(0);
+
+	if (tid < batchSize)
+	{
+		for (int i = 0; i < outputWidth; i++)
+		{
+			atomicAdd(&(dpars[i * (inputWidth + 1)]), doutp[tid * outputWidth + i] * outp[tid * outputWidth + i] / pars[i * (inputWidth + 1)]);
+			for (int j = 0; j < inputWidth; j++)
+			{
+				if (dinp != NULL)
+				{
+					dinp[tid* inputWidth + j] += doutp[tid * outputWidth + i] * outp[tid * outputWidth + i] * pars[i * (inputWidth + 1) + 1 + j] / (0.01f + 0.99f * inp[tid* inputWidth + j]);
+				}
+				atomicAdd(&(dpars[i * (inputWidth + 1) + 1 + j]), doutp[tid * outputWidth + i] * outp[tid * outputWidth + i] * log(0.01f + 0.99f * inp[tid* inputWidth + j]));
+			}
+		}
+	}
+}
+
 __kernel void max_forward(__global float *outp, __global  float *inp, int numPics, int x1, int x2, int d1, int d2, int batchSize)
 {
 	int tid = get_global_id(0);
