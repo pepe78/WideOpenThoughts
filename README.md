@@ -57,6 +57,24 @@ You can download [MNIST dataset here](https://www.dropbox.com/s/9eoiignb7tlrr2u/
 
 Top accuracy on test data: 97.47 %
 
+### configBBAnd.txt
+
+#### batch size 4000, log loss error, auto step size
+
+> and,784,130,0.5,-0.001
+
+> sigmoid,130
+
+> dropout,130,0.5
+
+> and,130,10,0.5,-0.001
+
+> softmax,10
+
+![graphBBAnd](./pics/BBAnd.png)
+
+Top accuracy on test data: 97.86 %
+
 ### configBB2.txt
 
 #### batch size 4000, log loss error, auto step size
