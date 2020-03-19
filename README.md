@@ -101,6 +101,32 @@ Top accuracy on test data: 97.86 %
 
 Top accuracy on test data: 98.35 %
 
+### configBB2OneAnd.txt
+
+#### batch size 4000, log loss error, auto step size
+
+> and,784,500,0.5,-0.001
+
+> sigmoid,500
+
+> matrix,500,250,0.5,-0.001
+
+> sigmoid,250
+
+> dropout,250,0.5
+
+> matrix,250,130,0.5,-0.001
+
+> sigmoid,130
+
+> matrix,130,10,0.5,-0.001
+
+> softmax,10
+
+![graphBB2](./pics/BB2OneAnd.png)
+
+Top accuracy on test data: 98.59 %
+
 ### configG.txt (convolutional neural network CNN)
 
 #### batch size 4000, log loss error, auto step size
