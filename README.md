@@ -151,7 +151,7 @@ Top accuracy on test data: 99.43 %
 
 ## What you need to download and install beforehand:
 
-* [Ubuntu for developers](https://www.ubuntu.com/desktop/developers) or [elementary OS](https://elementary.io/) or [Zorin OS](https://zorinos.com/download/#core) - it was [verified](https://www.frisky.world/2020/02/testing-elementary-os.html) & [verified](https://www.frisky.world/2020/03/testing-zorin-os-core.html)
+* [Ubuntu for developers](https://www.ubuntu.com/desktop/developers) or [elementary OS](https://elementary.io/) or [Zorin OS](https://zorinos.com/download/#core) - it was [verified](https://www.frisky.world/2020/02/testing-elementary-os.html) & [verified](https://www.frisky.world/2020/03/testing-zorin-os-core.html) & [verified](https://www.frisky.world/2020/04/testing-ubuntu-2004-daily-build-kernel.html)
 
 * [OpenCL](https://www.khronos.org/opencl/)
 
