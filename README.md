@@ -35,6 +35,10 @@ Hierarchical Feature Extraction](https://www.researchgate.net/profile/Jonathan_M
 * H. Xiao, K. Rasul, R. Vollgra: [Fashion-MNIST: a Novel Image Dataset for
 Benchmarking Machine Learning Algorithms](https://arxiv.org/pdf/1708.07747.pdf), Arxiv, 2017
 
+## Results for other datasets:
+
+* [Fashion MNIST results](./README_fashion.md)
+
 ## Results for MNIST dataset:
 
 You can download [MNIST dataset here](https://www.dropbox.com/s/9eoiignb7tlrr2u/mnist.zip?dl=0). Mnist dataset can be found in other formats on [Yann Lecun's web page](http://yann.lecun.com/exdb/mnist/index.html) or [Kaggle's web page](https://www.kaggle.com/c/digit-recognizer).
