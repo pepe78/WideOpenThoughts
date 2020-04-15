@@ -153,13 +153,16 @@ Top accuracy on test data: 98.59 %
 
 Top accuracy on test data: 99.43 %
 
+Some of these results were verified [PyTorch & Tensorflow](https://github.com/pepe78/MNISTWideNetwork).
+
 ## What you need to download and install beforehand:
 
 * [Ubuntu for developers](https://www.ubuntu.com/desktop/developers) or [elementary OS](https://elementary.io/) or [Zorin OS](https://zorinos.com/download/#core) - it was [verified](https://www.frisky.world/2020/02/testing-elementary-os.html) & [verified](https://www.frisky.world/2020/03/testing-zorin-os-core.html) & [verified](https://www.frisky.world/2020/04/testing-ubuntu-2004-daily-build-kernel.html)
 
 * [OpenCL](https://www.khronos.org/opencl/)
 
-* GPU card. Recommended: [Nvidia GeForce GTX 1080 Ti](https://www.nvidia.com/en-us/geforce/products/10series/geforce-gtx-1080-ti/) or [AMD Radeon VII](https://www.amd.com/en/products/graphics/amd-radeon-vii), but you can use any GPU supporting OpenCL.
+* GPU card. Recommended: [Nvidia GeForce GTX 1080 Ti](https://www.nvidia.com/en-us/geforce/products/10series/geforce-gtx-1080-ti/) or [AMD Radeon VII](https://www.amd.com/en/products/graphics/amd-radeon-vii), but you can use any GPU supporting 
+OpenCL.
 
 ## Other alternatives for training DNNs:
 
