@@ -1,6 +1,6 @@
 # Results for [Fashion MNIST](https://github.com/zalandoresearch/fashion-mnist)
 
-Data can be downloaded in WideOpenThouths format [here](https://www.dropbox.com/s/ra0701e5ksxcayq/fashion_mnist.zip), or original data can be downloaded [here](https://github.com/zalandoresearch/fashion-mnist/tree/master/data/fashion).
+Data can be downloaded in WideOpenThouths format [here](https://www.dropbox.com/s/ra0701e5ksxcayq/fashion_mnist.zip), or original data can be downloaded [here](https://github.com/zalandoresearch/fashion-mnist/tree/master/data/fashion). These results were achieved with [WideOpenThoughts](https://github.com/pepe78/WideOpenThoughts) using NVIDIA's GPU Geforce 1080Ti.
 
 ### configG.txt (convolutional neural network CNN)
 
