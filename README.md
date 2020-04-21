@@ -38,6 +38,7 @@ Benchmarking Machine Learning Algorithms](https://arxiv.org/pdf/1708.07747.pdf),
 ## Results for other datasets:
 
 * [Fashion MNIST results](./README_fashion.md)
+* [Adult dataset results](./README_adult.md)
 
 ## Results for MNIST dataset:
 
