@@ -1,6 +1,6 @@
 # Results for [Adult dataset](http://archive.ics.uci.edu/ml/datasets/Adult)
 
-Data can be downloaded in WideOpenThouths format [here](todo), or original data can be downloaded [here](http://archive.ics.uci.edu/ml/machine-learning-databases/adult/). These results were achieved with [WideOpenThoughts](https://github.com/pepe78/WideOpenThoughts) using NVIDIA's GPU Geforce 1080Ti.
+Data can be downloaded in WideOpenThouths format [here](https://www.dropbox.com/s/o741df7fjs95f0n/adult.zip), or original data can be downloaded [here](http://archive.ics.uci.edu/ml/machine-learning-databases/adult/). These results were achieved with [WideOpenThoughts](https://github.com/pepe78/WideOpenThoughts) using NVIDIA's GPU Geforce 1080Ti.
 
 ### config.txt
 
