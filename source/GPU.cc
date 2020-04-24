@@ -100,7 +100,12 @@ void GPU::Execute(char *function_name, char *pars, void **objects, int globalSiz
 
 void GPU::WaitForGPUToFinish()
 {
-	clFinish(queue);
+	cl_int err = clFinish(queue);
+	if(err != CL_SUCCESS)
+	{
+		fprintf(stderr, "Error waiting for GPU to finish!\n");
+		exit(-1);
+	}
 }
 
 void GPU::InitGPU()
