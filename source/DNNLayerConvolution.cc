@@ -1,5 +1,4 @@
 #include "DNNLayerConvolution.h"
-#include "kernels.h"
 
 #include <cstdlib>
 #include <cstdio>
@@ -13,17 +12,6 @@ DNNLayerConvolution::DNNLayerConvolution(GPU *_gpu, int _numPics, int _x1, int _
 	y2 = _y2;
 	numPics = _numPics;
 	numConvolutions = _numConvolutions;
-
-	if (x1 * x2 * numPics > MAXX1X2)
-	{
-		fprintf(stderr, "Project needs to be recompiled with larger field for convolution layer\n");
-		exit(-1);
-	}
-	if (y1 * y2 > MAXNUMCONVY1Y2)
-	{
-		fprintf(stderr, "Project needs to be recompiled with larger field for convolution layer\n");
-		exit(-1);
-	}
 }
 
 DNNLayerConvolution::~DNNLayerConvolution()

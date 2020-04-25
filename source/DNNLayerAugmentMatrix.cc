@@ -1,4 +1,3 @@
-#include "kernels.h"
 #include "DNNLayerAugmentMatrix.h"
 
 #include <cstdlib>
@@ -17,17 +16,6 @@ DNNLayerAugmentMatrix::DNNLayerAugmentMatrix(GPU *_gpu, int _numPics, int _x1, i
 	}
 	numPics = _numPics;
 	numConvolutions = _numConvolutions;
-
-	if (x1 * x2 * numPics > AMMAXX1X2)
-	{
-		fprintf(stderr, "Project needs to be recompiled with larger field for augment matrix layer\n");
-		exit(-1);
-	}
-	if (x1 * x2 > AMMAXNUMCONVY1Y2)
-	{
-		fprintf(stderr, "Project needs to be recompiled with larger field for augment matrix layer\n");
-		exit(-1);
-	}
 
 	//set diagonal to 1, with rest random numbers so it starts with close to identy projection
 	float* pars = (float*)params->GetCPUMemory();

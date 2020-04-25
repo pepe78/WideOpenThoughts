@@ -1,5 +1,3 @@
-#include "./source/kernels.h"
-
 inline float atomicAdd(volatile __global float* address, const float value){
     float old = value;
     while ((old = atomic_xchg(address, atomic_xchg(address, 0.0f)+old))!=0.0f);
@@ -23,21 +21,9 @@ __kernel void augmentmatrix_forward(__global float *outp, __global float *inp, _
 
 	if (tid < batchSize)
 	{
-		float pics[AMMAXX1X2];
-		for (int i = 0; i < x1 * x2 * numPics; i++)
-		{
-			pics[i] = inp[tid * inputWidth + i];
-		}
-		float convos[AMMAXNUMCONVY1Y2];
-
 		int pos = 0;
 		for (int c = 0; c < numConvolutions; c++)
 		{
-		  for (int i = 0; i < x1 * x2; i++)
-		  {
-			  convos[i] = pars[c * x1 * x2 + i];
-		  }
-
 			for (int p = 0; p < numPics; p++)
 			{
 				for (int i = 0; i < x1; i++)
@@ -47,7 +33,7 @@ __kernel void augmentmatrix_forward(__global float *outp, __global float *inp, _
 						float tmp = 0;
 						for (int k = 0; k < x2; k++)
 						{
-							tmp += pics[p * x1 * x2 + i * x2 + k] * convos[k * x2 + j];
+							tmp += inp[tid * inputWidth + p * x1 * x2 + i * x2 + k] * pars[c * x1 * x2 + k * x2 + j];
 						}
 						outp[tid * outputWidth + pos] = tmp;
 						pos++;
@@ -64,21 +50,9 @@ __kernel void augmentmatrix_backward(__global float *dinp, __global float *dpars
 
 	if (tid < batchSize)
 	{
-		float pics[AMMAXX1X2];
-		for (int i = 0; i < x1 * x2 * numPics; i++)
-		{
-			pics[i] = inp[tid * inputWidth + i];
-		}
-		float convos[AMMAXNUMCONVY1Y2];
-
 		int pos = 0;
 		for (int c = 0; c < numConvolutions; c++)
 		{
-		  for (int i = 0; i < x1 * x2; i++)
-		  {
-			  convos[i] = pars[c * x1 * x2 + i];
-		  }
-
 			for (int p = 0; p < numPics; p++)
 			{
 				for (int i = 0; i < x1; i++)
@@ -92,9 +66,9 @@ __kernel void augmentmatrix_backward(__global float *dinp, __global float *dpars
 							{
 								if (dinp != NULL)
 								{
-									dinp[tid * inputWidth + p * x1 * x2 + i * x2 + k] += tmp * convos[k * x2 + j];
+									dinp[tid * inputWidth + p * x1 * x2 + i * x2 + k] += tmp * pars[c * x1 * x2 + k * x2 + j];
 								}
-								atomicAdd(&(dpars[c * x1 * x2 + k * x2 + j]), tmp * pics[p * x1 * x2 + i * x2 + k]);
+								atomicAdd(&(dpars[c * x1 * x2 + k * x2 + j]), tmp * inp[tid * inputWidth + p * x1 * x2 + i * x2 + k]);
 							}
 						}
 						pos++;
@@ -111,21 +85,9 @@ __kernel void convolution_forward(__global float *outp, __global float *inp, __g
 
 	if (tid < batchSize)
 	{
-		float pics[MAXX1X2];
-		for (int i = 0; i < x1 * x2 * numPics; i++)
-		{
-			pics[i] = inp[tid * inputWidth + i];
-		}
-		float convos[MAXNUMCONVY1Y2];
-
 		int pos = 0;
 		for (int c = 0; c < numConvolutions; c++)
 		{
-		  for (int i = 0; i < y1 * y2; i++)
-		  {
-			  convos[i] = pars[c * y1 * y2 + i];
-		  }
-
 			for (int p = 0; p < numPics; p++)
 			{
 				for (int i = 0; i < x1 - y1 + 1; i++)
@@ -137,7 +99,7 @@ __kernel void convolution_forward(__global float *outp, __global float *inp, __g
 						{
 							for (int l = 0; l < y2; l++)
 							{
-								tmp += pics[p * x1 * x2 + (i + k) * x2 + (j + l)] * convos[k * y2 + l];
+								tmp += inp[tid * inputWidth + p * x1 * x2 + (i + k) * x2 + (j + l)] * pars[c * y1 * y2 + k * y2 + l];
 							}
 						}
 						outp[tid * outputWidth + pos] = tmp;
@@ -155,21 +117,9 @@ __kernel void convolution_backward(__global float *dinp, __global float *dpars, 
 
 	if (tid < batchSize)
 	{
-		float pics[MAXX1X2];
-		for (int i = 0; i < x1 * x2 * numPics; i++)
-		{
-			pics[i] = inp[tid * inputWidth + i];
-		}
-		float convos[MAXNUMCONVY1Y2];
-
 		int pos = 0;
 		for (int c = 0; c < numConvolutions; c++)
 		{
-		  for (int i = 0; i < y1 * y2; i++)
-		  {
-			  convos[i] = pars[c * y1 * y2 + i];
-		  }
-
 			for (int p = 0; p < numPics; p++)
 			{
 				for (int i = 0; i < x1 - y1 + 1; i++)
@@ -185,9 +135,9 @@ __kernel void convolution_backward(__global float *dinp, __global float *dpars, 
 								{
 									if (dinp != NULL)
 									{
-										dinp[tid * inputWidth + p * x1 * x2 + (i + k) * x2 + (j + l)] += tmp * convos[k * y2 + l];
+										dinp[tid * inputWidth + p * x1 * x2 + (i + k) * x2 + (j + l)] += tmp * pars[c * y1 * y2 + k * y2 + l];
 									}
-									atomicAdd(&(dpars[c * y1 * y2 + k * y2 + l]), tmp * pics[p * x1 * x2 + (i + k) * x2 + (j + l)]);
+									atomicAdd(&(dpars[c * y1 * y2 + k * y2 + l]), tmp * inp[tid * inputWidth + p * x1 * x2 + (i + k) * x2 + (j + l)]);
 								}
 							}
 						}
