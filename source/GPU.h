@@ -21,10 +21,10 @@ public:
 	~GPU();
 
 	void WaitForGPUToFinish();
-	cl_mem GetMemory(int size);
+	cl_mem GetMemory(size_t size);
 	void FreeMemory(cl_mem mem);
-	void CopyCPUtoGPU(void *cpu_mem, cl_mem gpu_mem, int size);
-	void CopyGPUtoCPU(void *cpu_mem, cl_mem gpu_mem, int size);
+	void CopyCPUtoGPU(void *cpu_mem, cl_mem gpu_mem, size_t size);
+	void CopyGPUtoCPU(void *cpu_mem, cl_mem gpu_mem, size_t size);
 	void Execute(char *function_name, char *pars, void **objects, int globalSize);
 };
 

@@ -16,7 +16,7 @@ GPU::~GPU()
 	ReleaseGPU();
 }
 
-cl_mem GPU::GetMemory(int size)
+cl_mem GPU::GetMemory(size_t size)
 {
 	return clCreateBuffer(context, CL_MEM_WRITE_ONLY, size, NULL, NULL);
 }
@@ -26,7 +26,7 @@ void GPU::FreeMemory(cl_mem mem)
 	clReleaseMemObject(mem);
 }
 
-void GPU::CopyCPUtoGPU(void *cpu_mem, cl_mem gpu_mem, int size)
+void GPU::CopyCPUtoGPU(void *cpu_mem, cl_mem gpu_mem, size_t size)
 {
 	cl_int err = clEnqueueWriteBuffer(queue, gpu_mem, CL_TRUE, 0, size, cpu_mem, 0, NULL, NULL);
 	if(err != CL_SUCCESS)
@@ -37,7 +37,7 @@ void GPU::CopyCPUtoGPU(void *cpu_mem, cl_mem gpu_mem, int size)
 	WaitForGPUToFinish();
 }
 
-void GPU::CopyGPUtoCPU(void *cpu_mem, cl_mem gpu_mem, int size)
+void GPU::CopyGPUtoCPU(void *cpu_mem, cl_mem gpu_mem, size_t size)
 {
 	cl_int err = clEnqueueReadBuffer(queue, gpu_mem, CL_TRUE, 0, size, cpu_mem, 0, NULL, NULL);
 	if(err != CL_SUCCESS)

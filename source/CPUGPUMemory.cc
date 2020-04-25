@@ -6,7 +6,7 @@
 #include <cstring>
 
 
-CPUGPUMemory::CPUGPUMemory(GPU *_gpu, bool _is_float, int _size, float _initValues)
+CPUGPUMemory::CPUGPUMemory(GPU *_gpu, bool _is_float, size_t _size, float _initValues)
 {
 	gpu = _gpu;
 	is_float = _is_float;
@@ -29,7 +29,7 @@ CPUGPUMemory::CPUGPUMemory(GPU *_gpu, bool _is_float, int _size, float _initValu
 	CopyCPUtoGPU();
 }
 
-void CPUGPUMemory::Resize(int newSize)
+void CPUGPUMemory::Resize(size_t newSize)
 {
 	size = newSize;
 }
