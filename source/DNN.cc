@@ -4,7 +4,6 @@
 #include "DNNLayerConvolution.h"
 #include "DNNLayerMatrix.h"
 #include "DNNLayerAnd.h"
-#include "DNNLayerAugmentMatrix.h"
 #include "DNNLayerMax.h"
 #include "DNNLayerSigmoid.h"
 #include "DNNLayerSoftMax.h"
@@ -52,23 +51,6 @@ DNN::DNN(GPU *_gpu, string &configFile, string &trainSetFile, string &testSetFil
 					float stepSize = convertToFloat(parts[8]);
 
 					DNNLayer *curLayer = new DNNLayerConvolution(_gpu, numPics, x1, x2, numConvo, y1, y2, _batchSize, initVal, stepSize);
-					layers.push_back(curLayer);
-				}
-				else if (parts[0].compare("augmentmatrix") == 0)
-				{
-					if (parts.size() != 7)
-					{
-						fprintf(stderr, "wrong setup of augment layer!\n");
-						exit(-1);
-					}
-					int numPics = convertToInt(parts[1]);
-					int x1 = convertToInt(parts[2]);
-					int x2 = convertToInt(parts[3]);
-					int numConvo = convertToInt(parts[4]);
-					float initVal = convertToFloat(parts[5]);
-					float stepSize = convertToFloat(parts[6]);
-
-					DNNLayer *curLayer = new DNNLayerAugmentMatrix(_gpu, numPics, x1, x2, numConvo, _batchSize, initVal, stepSize);
 					layers.push_back(curLayer);
 				}
 				else if (parts[0].compare("matrix") == 0)
