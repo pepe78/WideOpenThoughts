@@ -1,3 +1,8 @@
+#define MAXX1X2 784
+#define MAXNUMCONVY1Y2 64
+
+#ifndef NOKERNELS
+
 inline float atomicAdd(volatile __global float* address, const float value){
     float old = value;
     while ((old = atomic_xchg(address, atomic_xchg(address, 0.0f)+old))!=0.0f);
@@ -21,9 +26,21 @@ __kernel void convolution_forward(__global float *outp, __global float *inp, __g
 
 	if (tid < batchSize)
 	{
+		float pics[MAXX1X2];
+		for (int i = 0; i < x1 * x2 * numPics; i++)
+		{
+			pics[i] = inp[tid * inputWidth + i];
+		}
+		float convos[MAXNUMCONVY1Y2];
+		
 		int pos = 0;
 		for (int c = 0; c < numConvolutions; c++)
 		{
+			for (int i = 0; i < y1 * y2; i++)
+			{
+				convos[i] = pars[c * y1 * y2 + i];
+			}
+			
 			for (int p = 0; p < numPics; p++)
 			{
 				for (int i = 0; i < x1 - y1 + 1; i++)
@@ -35,7 +52,7 @@ __kernel void convolution_forward(__global float *outp, __global float *inp, __g
 						{
 							for (int l = 0; l < y2; l++)
 							{
-								tmp += inp[tid * inputWidth + p * x1 * x2 + (i + k) * x2 + (j + l)] * pars[c * y1 * y2 + k * y2 + l];
+								tmp += pics[p * x1 * x2 + (i + k) * x2 + (j + l)] * convos[k * y2 + l];
 							}
 						}
 						outp[tid * outputWidth + pos] = tmp;
@@ -53,9 +70,21 @@ __kernel void convolution_backward(__global float *dinp, __global float *dpars, 
 
 	if (tid < batchSize)
 	{
+		float pics[MAXX1X2];
+		for (int i = 0; i < x1 * x2 * numPics; i++)
+		{
+			pics[i] = inp[tid * inputWidth + i];
+		}
+		float convos[MAXNUMCONVY1Y2];
+		
 		int pos = 0;
 		for (int c = 0; c < numConvolutions; c++)
 		{
+			for (int i = 0; i < y1 * y2; i++)
+			{
+				convos[i] = pars[c * y1 * y2 + i];
+			}
+			
 			for (int p = 0; p < numPics; p++)
 			{
 				for (int i = 0; i < x1 - y1 + 1; i++)
@@ -71,9 +100,9 @@ __kernel void convolution_backward(__global float *dinp, __global float *dpars, 
 								{
 									if (dinp != NULL)
 									{
-										dinp[tid * inputWidth + p * x1 * x2 + (i + k) * x2 + (j + l)] += tmp * pars[c * y1 * y2 + k * y2 + l];
+										dinp[tid * inputWidth + p * x1 * x2 + (i + k) * x2 + (j + l)] += tmp * convos[k * y2 + l];
 									}
-									atomicAdd(&(dpars[c * y1 * y2 + k * y2 + l]), tmp * inp[tid * inputWidth + p * x1 * x2 + (i + k) * x2 + (j + l)]);
+									atomicAdd(&(dpars[c * y1 * y2 + k * y2 + l]), tmp * pics[p * x1 * x2 + (i + k) * x2 + (j + l)]);
 								}
 							}
 						}
@@ -456,3 +485,4 @@ __kernel void softmax_backward(__global float *dinp, __global  float *doutp, __g
 	}
 }
 
+#endif

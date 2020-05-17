@@ -1,1 +1,1 @@
-g++ ./source/*.cc -o wots -l OpenCL -lm
+g++ ./source/*.cc -o wots -l OpenCL -lm -Ofast
