@@ -108,6 +108,7 @@ void GPU::WaitForGPUToFinish()
 	}
 }
 
+
 void GPU::InitGPU()
 {
 	cl_int err;
@@ -121,11 +122,69 @@ void GPU::InitGPU()
 	}
 
 	// Get ID for the device
-	err = clGetDeviceIDs(cpPlatform, CL_DEVICE_TYPE_GPU, 1, &device_id, NULL);
+	cl_uint devices_n = 0;
+	err = clGetDeviceIDs(cpPlatform, CL_DEVICE_TYPE_GPU, 1, &device_id, &devices_n);
 	if(err != CL_SUCCESS)
 	{
 		fprintf(stderr, "No device id!\n");
 		exit(-1);
+	}
+	
+	for (int i=0; i<devices_n; i++)
+	{
+		char buffer[10240];
+		cl_uint buf_uint;
+		cl_ulong buf_ulong;
+		printf("  -- GPU %d --\n", i);
+		err = clGetDeviceInfo(device_id, CL_DEVICE_NAME, sizeof(buffer), buffer, NULL);
+		if(err != CL_SUCCESS)
+		{
+			fprintf(stderr, "Device info error!\n");
+			exit(-1);
+		}
+		printf("  DEVICE_NAME = %s\n", buffer);
+		err = clGetDeviceInfo(device_id, CL_DEVICE_VENDOR, sizeof(buffer), buffer, NULL);
+		if(err != CL_SUCCESS)
+		{
+			fprintf(stderr, "Device info error!\n");
+			exit(-1);
+		}
+		printf("  DEVICE_VENDOR = %s\n", buffer);
+		err = clGetDeviceInfo(device_id, CL_DEVICE_VERSION, sizeof(buffer), buffer, NULL);
+		if(err != CL_SUCCESS)
+		{
+			fprintf(stderr, "Device info error!\n");
+			exit(-1);
+		}
+		printf("  DEVICE_VERSION = %s\n", buffer);
+		err = clGetDeviceInfo(device_id, CL_DRIVER_VERSION, sizeof(buffer), buffer, NULL);
+		if(err != CL_SUCCESS)
+		{
+			fprintf(stderr, "Device info error!\n");
+			exit(-1);
+		}
+		printf("  DRIVER_VERSION = %s\n", buffer);
+		err = clGetDeviceInfo(device_id, CL_DEVICE_MAX_COMPUTE_UNITS, sizeof(buf_uint), &buf_uint, NULL);
+		if(err != CL_SUCCESS)
+		{
+			fprintf(stderr, "Device info error!\n");
+			exit(-1);
+		}
+		printf("  DEVICE_MAX_COMPUTE_UNITS = %u\n", (unsigned int)buf_uint);
+		err = clGetDeviceInfo(device_id, CL_DEVICE_MAX_CLOCK_FREQUENCY, sizeof(buf_uint), &buf_uint, NULL);
+		if(err != CL_SUCCESS)
+		{
+			fprintf(stderr, "Device info error!\n");
+			exit(-1);
+		}
+		printf("  DEVICE_MAX_CLOCK_FREQUENCY = %u\n", (unsigned int)buf_uint);
+		err = clGetDeviceInfo(device_id, CL_DEVICE_GLOBAL_MEM_SIZE, sizeof(buf_ulong), &buf_ulong, NULL);
+		if(err != CL_SUCCESS)
+		{
+			fprintf(stderr, "Device info error!\n");
+			exit(-1);
+		}
+		printf("  DEVICE_GLOBAL_MEM_SIZE = %llu\n", (unsigned long long)buf_ulong);
 	}
 
 	// Create a context 
