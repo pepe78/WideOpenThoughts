@@ -13,7 +13,7 @@ private:
 	void *memCPU;
 	void *memGPU;
 
-	size_t size;
+	int size;
 
 	bool is_float;
 	GPU *gpu;
