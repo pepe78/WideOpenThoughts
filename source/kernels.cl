@@ -1,5 +1,6 @@
 #define MAXX1X2 784
 #define MAXNUMCONVY1Y2 64
+#define PMAXX1X2 784 //1 * 28 * 28
 
 #ifndef NOKERNELS
 
@@ -17,6 +18,62 @@ __kernel void make_step_kernel(__global float *pars, __global float *dpars, floa
 	{
 		pars[tid] -= dpars[tid] * stepSize;
 		dpars[tid] = 0;
+	}
+}
+
+__kernel void preprocess_forward(__global float *outp, __global float *noise, __global float *inp, int inputWidth, int outputWidth, int x1, int x2, int batchSize, float angle, float sx, float sy, int nx1, int nx2, int trainRun)
+{
+	int tid = get_global_id(0);
+
+	if (tid < batchSize)
+	{
+		if(trainRun == 1)
+		{
+			float t_outp[PMAXX1X2];
+			float t_tmp[PMAXX1X2];
+			
+			for(int i=0;i<outputWidth;i++)
+			{
+				t_outp[i] = 0.0f;
+				t_tmp[i] = 0.0f;
+			}
+		
+			for(int i=0;i<nx1;i++)
+			{
+				for(int j=0;j<nx2;j++)
+				{
+					int ii = (int)i * x1 / nx1;
+					int jj = (int)j * x2 / nx2;
+					float p = inp[tid * inputWidth + ii * x2 + jj];
+					
+					float iii = (i + 0.0f) / (nx1 + 0.0f) - 0.5f;
+					float jjj = (j + 0.0f) / (nx2 + 0.0f) - 0.5f;
+					
+					float iiii = (cos(angle) * iii - sin(angle) * jjj) * sx + 0.5f;
+					float jjjj = (sin(angle) * iii + cos(angle) * jjj) * sy + 0.5f;
+					
+					int fi = (int)((float)iiii * (x1 + 0.0f));
+					int fj = (int)((float)jjjj * (x2 + 0.0f));
+					
+					if(fi>=0 && fi<x1 && fj>=0 && fj<x2)
+					{
+						t_outp[fi * x2 + fj] = (t_outp[fi * x2 + fj] * t_tmp[fi * x2 + fj] + p) / (t_tmp[fi * x2 + fj] + 1.0f);
+						t_tmp[fi * x2 + fj] += 1.0f;
+					}
+				}
+			}
+			for(int i=0;i<outputWidth;i++)
+			{
+				outp[tid * outputWidth + i] = t_outp[i] + noise[tid * outputWidth + i];
+			}	
+		}
+		else
+		{
+			for(int i=0;i<outputWidth;i++)
+			{
+				outp[tid * outputWidth + i] = inp[tid * outputWidth + i];
+			}	
+		}
 	}
 }
 
