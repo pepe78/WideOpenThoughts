@@ -1,4 +1,6 @@
 #include "DNNLayerMatrix.h"
+#define NOKERNELS
+#include "kernels.cl"
 
 #include <cstdlib>
 #include <cstdio>
@@ -6,6 +8,11 @@
 DNNLayerMatrix::DNNLayerMatrix(GPU *_gpu, int _inputWidth, int _outputWidth, int _batchSize, float _initVal, float _stepSize)
 	: DNNLayer(_gpu, _batchSize, _inputWidth, _outputWidth, _outputWidth * (_inputWidth + 1), _initVal, _stepSize)
 {
+	if (_inputWidth > MAXINP || _outputWidth > MAXOUTP)
+	{
+		fprintf(stderr, "Project needs to be recompiled with larger field for matrix layer\n");
+		exit(-1);
+	}
 }
 
 DNNLayerMatrix::~DNNLayerMatrix()
