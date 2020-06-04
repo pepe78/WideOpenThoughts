@@ -31,11 +31,7 @@ int main(int argc, char *argv[])
 	int saveEvery = convertToInt(saveEveryStr);
 	DNN *dnn = new DNN(gpu, configFile, trainFile, testFile, batchSize, paramFile, saveEvery, errorType, whereMax);
 
-	for (int r = 0; r < 1000000; r++)
-	{
-		dnn->Train();
-		dnn->Test();
-	}
+	dnn->Train();
 
 	delete dnn;
 	delete gpu;

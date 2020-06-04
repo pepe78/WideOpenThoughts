@@ -1,6 +1,8 @@
 #define MAXX1X2 784
 #define MAXNUMCONVY1Y2 64
 #define PMAXX1X2 784 //1 * 28 * 28
+#define MAXINP 5000
+#define MAXOUTP 5000
 
 #ifndef NOKERNELS
 
@@ -250,12 +252,18 @@ __kernel void matrix_forward(__global float *outp, __global  float *inp, __globa
 
 	if (tid < batchSize)
 	{
+		float inp2[MAXINP];
+		for(int i=0;i<inputWidth;i++)
+		{
+			inp2[i] = inp[tid* inputWidth + i];
+		}
+	
 		for (int i = 0; i < outputWidth; i++)
 		{
 			float tmp = pars[i * (inputWidth + 1)];
 			for (int j = 0; j < inputWidth; j++)
 			{
-				tmp += pars[i * (inputWidth + 1) + 1 + j] * inp[tid* inputWidth + j];
+				tmp += pars[i * (inputWidth + 1) + 1 + j] * inp2[j];
 			}
 			outp[tid * outputWidth + i] = tmp;
 		}
@@ -268,16 +276,27 @@ __kernel void matrix_backward(__global float *dinp, __global float *dpars, __glo
 
 	if (tid < batchSize)
 	{
+		float inp2[MAXINP];
+		for(int i=0;i<inputWidth;i++)
+		{
+			inp2[i] = inp[tid* inputWidth + i];
+		}
+		float doutp2[MAXOUTP];
+		for(int i=0;i<outputWidth;i++)
+		{
+			doutp2[i] = doutp[tid * outputWidth + i];
+		}
+	
 		for (int i = 0; i < outputWidth; i++)
 		{
-			atomicAdd(&(dpars[i * (inputWidth + 1)]), doutp[tid * outputWidth + i]);
+			atomicAdd(&(dpars[i * (inputWidth + 1)]), doutp2[i]);
 			for (int j = 0; j < inputWidth; j++)
 			{
 				if (dinp != NULL)
 				{
-					dinp[tid* inputWidth + j] += doutp[tid * outputWidth + i] * pars[i * (inputWidth + 1) + 1 + j];
+					dinp[tid* inputWidth + j] += doutp2[i] * pars[i * (inputWidth + 1) + 1 + j];
 				}
-				atomicAdd(&(dpars[i * (inputWidth + 1) + 1 + j]), doutp[tid * outputWidth + i] * inp[tid* inputWidth + j]);
+				atomicAdd(&(dpars[i * (inputWidth + 1) + 1 + j]), doutp2[i] * inp2[j]);
 			}
 		}
 	}
