@@ -14,7 +14,7 @@ To compile on linux:
 
 > ./compile.sh
 
-To Compile on Windows, open sln solution.
+To compile on Windows, open sln solution.
 
 To run training using your train and test data from command line execute:
 
