@@ -14,6 +14,8 @@ To compile on linux:
 
 > ./compile.sh
 
+To Compile on Windows, open sln solution.
+
 To run training using your train and test data from command line execute:
 
 > ./wots configFile trainFile testFile batchSize(integer) paramFile/null saveEveryNEpochs(integer) square/log wheremax/netflix/none
