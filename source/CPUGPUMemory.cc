@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
-#include <limits.h>
+#include <climits>
 
 
 CPUGPUMemory::CPUGPUMemory(GPU *_gpu, bool _is_float, size_t _size, float _initValues)
@@ -38,6 +38,11 @@ CPUGPUMemory::CPUGPUMemory(GPU *_gpu, bool _is_float, size_t _size, float _initV
 
 void CPUGPUMemory::Resize(size_t newSize)
 {
+	if(newSize > INT_MAX)
+	{
+		fprintf(stderr, "Software not ready for so much memory usage!\n");
+		exit(-1);
+	}
 	size = newSize;
 }
 
