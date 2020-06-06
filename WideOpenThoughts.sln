@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WideOpenThoughts", "WideOpenThoughts\WideOpenThoughts.vcxproj", "{65DC85B1-0889-4161-B19F-704008227AF4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65DC85B1-0889-4161-B19F-704008227AF4}.Release|x64.ActiveCfg = Release|x64
+		{65DC85B1-0889-4161-B19F-704008227AF4}.Release|x64.Build.0 = Release|x64
+		{65DC85B1-0889-4161-B19F-704008227AF4}.Release|x86.ActiveCfg = Release|Win32
+		{65DC85B1-0889-4161-B19F-704008227AF4}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E97370FC-AEB5-4FF0-846C-9C9E0018262F}
+	EndGlobalSection
+EndGlobal

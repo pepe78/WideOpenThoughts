@@ -130,7 +130,7 @@ void GPU::InitGPU()
 		exit(-1);
 	}
 	
-	for (int i=0; i<devices_n; i++)
+	for (cl_uint i=0; i<devices_n; i++)
 	{
 		char buffer[10240];
 		cl_uint buf_uint;
@@ -196,7 +196,12 @@ void GPU::InitGPU()
 	}
 
 	// Create a command queue
+#ifdef _WIN32
+	queue = clCreateCommandQueue(context, device_id, 0, &err);
+#else
 	queue = clCreateCommandQueueWithProperties(context, device_id, 0, &err);
+#endif
+
 	if(err != CL_SUCCESS)
 	{
 		fprintf(stderr, "Command queue not created!\n");
@@ -205,7 +210,7 @@ void GPU::InitGPU()
 
 	// Create the compute program from the source buffer
 	ifstream myfile ("./source/kernels.cl");
-	int length;
+	size_t length;
 	myfile.seekg(0, std::ios::end);
 	length = myfile.tellg();
 	myfile.seekg(0, std::ios::beg);

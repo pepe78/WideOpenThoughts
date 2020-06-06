@@ -43,7 +43,7 @@ void CPUGPUMemory::Resize(size_t newSize)
 		fprintf(stderr, "Software not ready for so much memory usage!\n");
 		exit(-1);
 	}
-	size = newSize;
+	size = (int)newSize;
 }
 
 CPUGPUMemory::~CPUGPUMemory()
