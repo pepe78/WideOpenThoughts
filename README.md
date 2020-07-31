@@ -156,6 +156,49 @@ Top accuracy on test data: 98.59 %
 
 Top accuracy on test data: 99.43 %
 
+### configX.txt ([random convolutional neural network RCNN](https://www.frisky.world/2020/07/when-you-dont-train-parameters-of.html))
+
+#### batch size 3000, log loss error, auto step size
+
+> convolution,1,28,28,400,8,8,0.5,0
+
+> max,400,21,21,7,7
+
+> matrix,3600,130,0.5,-0.001
+
+> sigmoid,130
+
+> dropout,130,0.5
+
+> matrix,130,10,0.5,-0.001
+
+> softmax,10
+
+![graphX](./pics/graphX.png)
+
+### configY.txt ([sufficient random convolutional neural network SRCNN](https://www.frisky.world/2020/07/when-you-realize-you-need-only-64.html))
+
+#### batch size 3000, log loss error, auto step size
+
+> convolution,1,28,28,64,8,8,0.5,0
+
+> convolution,1,64,441,200,64,1,0.5,-0.001
+
+> max,200,21,21,7,7
+
+> matrix,1800,130,0.5,-0.001
+
+> sigmoid,130
+
+> dropout,130,0.5
+
+> matrix,130,10,0.5,-0.001
+
+> softmax,10
+
+![graphY](./pics/graphY.png)
+
+
 Some of these results were verified with [PyTorch & Tensorflow](https://github.com/pepe78/MNISTWideNetwork).
 
 ## What you need to download and install beforehand:
