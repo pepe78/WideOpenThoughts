@@ -4,6 +4,7 @@
 #include "DNNLayerConvolution.h"
 #include "DNNLayerPreprocess.h"
 #include "DNNLayerMatrix.h"
+#include "DNNLayerNoise.h"
 #include "DNNLayerAnd.h"
 #include "DNNLayerMax.h"
 #include "DNNLayerSigmoid.h"
@@ -166,6 +167,19 @@ DNN::DNN(GPU *_gpu, string &configFile, string &trainSetFile, string &testSetFil
 					float perc = convertToFloat(parts[2]);
 
 					DNNLayer *curLayer = new DNNLayerDropout(_gpu, inpWidth, _batchSize, perc);
+					layers.push_back(curLayer);
+				}
+				else if (parts[0].compare("noise") == 0)
+				{
+					if (parts.size() != 3)
+					{
+						fprintf(stderr, "wrong setup of noise layer!\n");
+						exit(-1);
+					}
+					int inpWidth = convertToInt(parts[1]);
+					float noisesize = convertToFloat(parts[2]);
+
+					DNNLayer *curLayer = new DNNLayerNoise(_gpu, inpWidth, _batchSize, noisesize);
 					layers.push_back(curLayer);
 				}
 				else if (parts[0].compare("max") == 0)

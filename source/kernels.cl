@@ -209,6 +209,32 @@ __kernel void dropout_backward(__global float *dinp, __global  float *doutp, __g
 	}
 }
 
+__kernel void noise_forward(__global float *outp, __global  float *inp, __global  float *dom, int inputWidth, float perc, int batchSize)
+{
+	int tid = get_global_id(0);
+
+	if (tid < batchSize)
+	{
+		for (int i = 0; i < inputWidth; i++)
+		{
+			outp[tid * inputWidth + i] = inp[tid * inputWidth + i] + dom[tid * inputWidth + i];
+		}
+	}
+}
+
+__kernel void noise_backward(__global float *dinp, __global  float *doutp, __global  float *outp, __global  float *inp, __global  float *dom, int inputWidth, float perc, int batchSize)
+{
+	int tid = get_global_id(0);
+
+	if (tid < batchSize)
+	{
+		for (int i = 0; i < inputWidth; i++)
+		{
+			dinp[tid * inputWidth + i] = doutp[tid * inputWidth + i];
+		}
+	}
+}
+
 __kernel void error_square_kernel(__global float *error, __global float *dinput, __global  float *expOutp, __global  float *outp, int inputWidth, int batchSize)
 {
 	int tid = get_global_id(0);
