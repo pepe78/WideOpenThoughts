@@ -198,6 +198,25 @@ Top accuracy on test data: 99.43 %
 
 ![graphY](./pics/graphY.png)
 
+### configZ.txt
+
+#### batch size 3500, log loss error, auto step size
+
+> convolution,1,28,28,200,8,8,0.5,-0.001
+
+> max,200,21,21,7,7
+
+> matrix,1800,130,0.5,-0.001
+
+> sigmoid,130
+
+> noise,130,0.1
+
+> matrix,130,10,0.5,-0.001
+
+> softmax,10
+
+![graphZ](./pics/graphZ.png)
 
 Some of these results were verified with [PyTorch & Tensorflow](https://github.com/pepe78/MNISTWideNetwork).
 
