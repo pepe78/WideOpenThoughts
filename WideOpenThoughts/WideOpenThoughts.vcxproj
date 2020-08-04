@@ -159,6 +159,7 @@
     <ClCompile Include="..\source\DNNLayerMatrix.cc" />
     <ClCompile Include="..\source\DNNLayerMax.cc" />
     <ClCompile Include="..\source\DNNLayerMovieUser.cc" />
+    <ClCompile Include="..\source\DNNLayerNoise.cc" />
     <ClCompile Include="..\source\DNNLayerPreprocess.cc" />
     <ClCompile Include="..\source\DNNLayerRelu.cc" />
     <ClCompile Include="..\source\DNNLayerSigmoid.cc" />
@@ -181,6 +182,7 @@
     <ClInclude Include="..\source\DNNLayerMatrix.h" />
     <ClInclude Include="..\source\DNNLayerMax.h" />
     <ClInclude Include="..\source\DNNLayerMovieUser.h" />
+    <ClInclude Include="..\source\DNNLayerNoise.h" />
     <ClInclude Include="..\source\DNNLayerPreprocess.h" />
     <ClInclude Include="..\source\DNNLayerRelu.h" />
     <ClInclude Include="..\source\DNNLayerSigmoid.h" />
