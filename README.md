@@ -226,7 +226,7 @@ Top accuracy on test data: 99.43 %
 
 > max,200,21,21,7,7
 
-> noise,1800,0.5
+> [noise](https://www.frisky.world/2020/08/when-you-use-noise-layer-instead-of.html),1800,0.5
 
 > matrix,1800,130,0.5,-0.001
 
