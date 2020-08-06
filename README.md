@@ -238,6 +238,8 @@ Top accuracy on test data: 99.43 %
 
 ![graphW](./pics/graphW.png)
 
+Top accuracy on test data: 99.36 %
+
 Some of these results were verified with [PyTorch & Tensorflow](https://github.com/pepe78/MNISTWideNetwork).
 
 ## What you need to download and install beforehand:
