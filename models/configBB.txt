@@ -1,0 +1,5 @@
+matrix,784,130,0.5,-0.001
+sigmoid,130
+dropout,130,0.5
+matrix,130,10,0.5,-0.001
+sigmoid,10
