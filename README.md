@@ -14,6 +14,10 @@ To compile on linux:
 
 > ./compile.sh
 
+Or run provided mnist example:
+
+> ./run_mnist_example.sh
+
 To compile on Windows, open sln solution.
 
 To run training using your train and test data from command line execute:
