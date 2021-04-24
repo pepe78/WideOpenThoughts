@@ -252,8 +252,7 @@ Some of these results were verified with [PyTorch & Tensorflow](https://github.c
 
 * [OpenCL](https://www.khronos.org/opencl/)
 
-* GPU card. Recommended: [Nvidia GeForce GTX 1080 Ti](https://www.nvidia.com/en-us/geforce/products/10series/geforce-gtx-1080-ti/) or [AMD Radeon VII](https://www.amd.com/en/products/graphics/amd-radeon-vii), but you can use any GPU supporting 
-OpenCL.
+* GPU card
 
 ## Other alternatives for training DNNs:
 
